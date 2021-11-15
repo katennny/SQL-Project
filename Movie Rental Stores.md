@@ -3,9 +3,10 @@ Development of the Sakila sample database began in early 2005. Early designs wer
 The Sakila sample database is designed to represent a DVD rental store. The Sakila sample database still borrows film and actor names from the Dell sample database.
 
 I wrote SQL to manage a chain of movie rental stores, for example,
-- Tracktheinventorylevelanddeterminewhethertherentalcanhappen 
-- Managecustomerinformationandidentifyloyaltycustomers
-- Monitorcustomers’owingbalanceandfindoverdueDVDs
+- Track the inventory level and determine whether the rental can happen 
+- Manage customer in formation and identify loyalty customers
+- Monitor customers’ owing balance and find overdue DVDs
+
 This project can be considered as a typical retail-related business case, because it has the main metrics that can be found in any retailer’s real database, such Walmart, Shoppers, Loblaws, Amazon...
 
 ## Exercise 1
