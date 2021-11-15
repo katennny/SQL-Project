@@ -47,3 +47,52 @@ SELECT CASE WHEN length > 0 AND length < 60 THEN 'short'
 ```
 
 ## Exercise 3: Use *actor* table
+### Which actors have the last name ‘Johansson’
+```
+SELECT * 
+FROM actor 
+WHERE last_name= 'Johansson';
+```
+
+### How many distinct actors’ last names are there?
+```
+SELECT COUNT(DISTINCT last_name) AS Distinct_last_names
+FROM actor;
+```
+
+### Which last names are not repeated? Hint: use COUNT() and GROUP BY and HAVING
+```
+SELECT last_name,
+COUNT(*) AS num_last_name
+FROM actor
+GROUP BY last_name
+HAVING COUNT(*) = 1;
+```
+
+### Which last names appear more than once?
+```
+SELECT last_name,
+COUNT(*) AS num_last_name
+FROM actor
+GROUP BY last_name
+HAVING COUNT(*) > 1;
+```
+
+## Exercise 3: Use *film_actor* table
+### Count the number of actors in each film, order the result by the number of actors with descending order
+```
+SELECT film_id,
+COUNT(DISTINCT actor_id) AS num_of_actor
+FROM film_actor
+GROUP BY film_id
+ORDER BY num_of_actor DESC;
+```
+
+### How many films each actor played in?
+```
+SELECT actor_id,
+COUNT(DISTINCT film_id) AS num_of_film
+FROM film_actor
+GROUP BY actor_id 
+ORDER BY num_of_film DESC;
+```
