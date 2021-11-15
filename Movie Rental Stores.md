@@ -19,7 +19,7 @@ SELECT * FROM film_category limit 100;
 SELECT * FROM category limit 100;
 ```
 
-## Exercise 2
+## Exercise 2: Use *film* table
 ### What is the largest rental_rate for each rating?
 ```
 SELECT rating, max(rental_rate)
@@ -34,3 +34,16 @@ FROM film
 GROUP BY rating;
 ```
 
+### Create a new column film_length to segment different films by length: length < 60 then ‘short’; length < 120 then ‘starndard’; lengh >=120 then ‘long’, then count the number of files in each segment.
+```
+SELECT CASE WHEN length > 0 AND length < 60 THEN 'short'			
+		    WHEN length >= 60 AND length < 120 THEN 'standard'            
+		    WHEN length >=120 THEN 'long'           
+                         ELSE 'others'            
+                         END as film_length, 
+                         count(film_id) FROM film            
+                         group by 1
+                         order by 2;
+```
+
+## Exercise 3: Use *actor* table
