@@ -96,3 +96,18 @@ FROM film_actor
 GROUP BY actor_id 
 ORDER BY num_of_film DESC;
 ```
+
+### Find language name for each film by using table Film and Language
+```
+SELECT film.*, language.name AS language_name
+FROM film LEFT JOIN language ON film.language_id = language.language_id;
+```
+
+### In table Film_actor, there are actor_id and film_id columns. I want to know the actor name for each actor_id, and film tile for each film_id. Hint: Use multiple table Inner Join
+```
+SELECT film_actor.*, actor.first_name, actor.last_name, film.title
+FROM film_actor JOIN actor ON film_actor.actor_id = actor.actor_id
+JOIN film ON film_actor.film_id = film.film_id;
+```
+
+### In table Film, there are no category information. I want to know which category each film belongs to. Hint: use table film_category to find the category id for each film and then use table category to get category name
