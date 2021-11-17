@@ -1,3 +1,5 @@
+## Introduction
+### The data in this project
 In this project I wrote more advanced SQL queries on a database designed to resemble a real-world database system - MySQL’s Sakila Sample Database.
 The Sakila sample database is designed to represent a DVD rental store. 
 
@@ -128,3 +130,47 @@ SELECT *
 FROM film 
 WHERE rental_rate > 2;
 ```
+## Exercise 5: Look at the sales
+### How many rentals (basically, the sales volume) happened from 2005-05 to 2005-08? Hint: use date between '2005-05-01' and '2005-08-31';
+```
+SELECT COUNT(rental_id) AS sales_volume
+FROM rental
+WHERE rental_date BETWEEN '2005-05-01' AND '2005-08-31';
+```
+
+### I want to see the rental volume by month. Hint: you need to use substring function to create a month column
+```
+SELECT
+SUBSTRING(rental_date, 1,7) AS rental_month, 
+COUNT(rental_Id) AS sales_volume FROM rental
+WHERE rental_date BETWEEN '2005-05-01' AND '2005-08-31' 
+GROUP BY 1;
+```
+
+### Rank the staff by total rental volumes for all time period. I need the staff’s names, so you have to join with staff table
+```
+SELECT s.first_name, s.last_name,
+COUNT(r.rental_id) as sales_volume
+FROM rental AS r LEFT JOIN staff as s ON r.staff_id = s.staff_id
+GROUP BY 1,2
+ORDER BY sales_volume;
+```
+
+## Exercise 6: About Inventory
+### Create the current inventory level report for each film in each store
+```
+SELECT film_id, store_id, 
+COUNT(inventory_id) 
+FROM inventory
+GROUP BY 1,2;
+```
+
+### When you show the inventory level to your manager, you manager definitely wants to know the film name. Please add film name for the inventory report.
+```
+SELECT f.title AS film_name, i.film_id, i.store_id,
+COUNT(inventory_id) 
+FROM inventory AS i LEFT JOIN film AS f ON i.film_id = f.film_id
+GROUP BY 1,2,3;
+```
+
+### After you show the inventory level again to your manager, you manager still wants to know the category for each film. Please add the category for the inventory report.
