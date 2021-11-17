@@ -97,6 +97,7 @@ GROUP BY actor_id
 ORDER BY num_of_film DESC;
 ```
 
+## Exercise 4
 ### Find language name for each film by using table Film and Language
 ```
 SELECT film.*, language.name AS language_name
@@ -111,3 +112,19 @@ JOIN film ON film_actor.film_id = film.film_id;
 ```
 
 ### In table Film, there are no category information. I want to know which category each film belongs to. Hint: use table film_category to find the category id for each film and then use table category to get category name
+```
+SELECT f.*, c.name AS category_name
+FROM film AS f LEFT JOIN film_category AS fc ON f.film_id = fc.film_id
+LEFT JOIN category AS c ON fc.category_id = c.category_id;
+```
+
+### Select films with rental_rate > 2 and then combine the results with films with rating G, PG-13 or PG
+```
+SELECT * 
+FROM film 
+WHERE rating IN ('G', 'PG-13', 'PG')
+UNION
+SELECT *
+FROM film 
+WHERE rental_rate > 2;
+```
